@@ -15,8 +15,8 @@ keywords = {
 # Tokens based on the parser
 
 tokens = ['SEMICOLON', 'LEFTBRACKET', 'RIGHTBRACKET', 'GREATER', 'LESS', 'NOTEQUAL', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE',
-          'LEFTPAREN', 'RIGHTPAREN', 'ID', 'CTEI', 'CTEF', 'COLON', 'EQUALS', 'CTESTRING', 'COMMA'] + list(
-    keywords.values())
+          'LEFTPAREN', 'RIGHTPAREN', 'ID', 'CTEI', 'CTEF', 'COLON', 'EQUALS', 'CTESTRING', 'COMMA', 'PROGRAM', 'PRINT',
+          'IF', 'ELSE', 'VAR', 'INT', 'FLOAT']
 
 # Regular expressions
 
