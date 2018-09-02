@@ -20,7 +20,7 @@ tokens = ['SEMICOLON', 'LEFTBRACKET', 'RIGHTBRACKET', 'GREATER', 'LESS', 'NOTEQU
 
 # Regular expressions
 
-t_SEMICOLON = r';'
+t_SEMICOLON = r'\;'
 t_LEFTBRACKET = r'\{'
 t_RIGHTBRACKET = r'\}'
 t_GREATER = r'>'
@@ -41,10 +41,17 @@ t_ignore = " \t"
 
 # Regular expression with some action
 
-# Define a ID
+# # Define a ID
 def t_ID(t):
     r'[A-za-z]([A-za-z]|[0-9])*'
     t.type = keywords.get(t.value, 'ID')
+    return t
+
+
+# Define a float number
+def t_CTEF(t):
+    r'[0-9]*\.[0-9]+|[0-9]+'
+    t.value = float(t.value)
     return t
 
 
@@ -52,12 +59,7 @@ def t_ID(t):
 def t_CTEI(t):
     r'\d+'
     t.value = int(t.value)
-
-
-# Define a float number
-def t_CTEF(t):
-    r'([0-9]*\.[0-9]+|[0-9]+)'
-    t.value = float(t.value)
+    return t
 
 
 # Define a new line or multiple new lines

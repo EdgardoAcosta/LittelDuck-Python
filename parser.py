@@ -1,9 +1,3 @@
-import sys
-import ply.yacc as yacc
-
-from lexer import tokens
-
-
 # Grammar declaration
 
 def p_program(p):
@@ -20,15 +14,15 @@ def p_block(p):
     '''block : LEFTBRACKET statement_block RIGHTBRACKET'''
 
 
+def p_statement_block(p):
+    '''statement_block : statement statement_block
+                       | empty'''
+
+
 def p_statement(p):
     '''statement : assignment
                  | condition
                  | writing'''
-
-
-def p_statement_block(p):
-    '''statement_block : statement  statement_block
-                       | empty'''
 
 
 def p_expression(p):
@@ -37,9 +31,9 @@ def p_expression(p):
 
 def p_comparation(p):
     '''comparation : GREATER comparation_exp
-                   | LESS comparation_exp
-                   | NOTEQUAL comparation_exp
-                   | empty'''
+                      | LESS comparation_exp
+                      | NOTEQUAL comparation_exp
+                      | empty'''
 
 
 def p_comparation_exp(p):
@@ -62,13 +56,13 @@ def p_term(p):
 
 def p_term_operator(p):
     '''term_operator : TIMES factor term_operator
-                    | DIVIDE factor term_operator
-                    | empty'''
+                     | DIVIDE factor term_operator
+                     | empty'''
 
 
 def p_factor(p):
     '''factor : LEFTPAREN expression RIGHTPAREN
-             | sign var_cte'''
+              | sign var_cte'''
 
 
 def p_sing(p):
@@ -79,8 +73,8 @@ def p_sing(p):
 
 def p_var_cte(p):
     '''var_cte : ID
-              | CTEI
-              | CTEF'''
+               | CTEI
+               | CTEF'''
 
 
 def p_vars(p):
@@ -93,7 +87,7 @@ def p_var_id(p):
 
 def p_var_id_2(p):
     '''var_id_2 : COMMA ID var_id_2
-              | empty'''
+                | empty'''
 
 
 def p_type(p):
@@ -103,11 +97,11 @@ def p_type(p):
 
 def p_vars_block(p):
     '''vars_block : var_id COLON type SEMICOLON vars_block
-                 | empty'''
+                  | empty'''
 
 
 def p_assignment(p):
-    '''assignment : ID EQUALS expression SEMICOLON '''
+    '''assignment : ID EQUALS expression SEMICOLON'''
 
 
 def p_condition(p):
@@ -116,7 +110,7 @@ def p_condition(p):
 
 def p_else_condition(p):
     '''else_condition : ELSE block
-                     | empty'''
+                      | empty'''
 
 
 def p_writing(p):
@@ -125,22 +119,29 @@ def p_writing(p):
 
 def p_print_val(p):
     '''print_val : expression print_exp
-             | CTESTRING print_exp'''
+                 | CTESTRING print_exp'''
 
 
 def p_print_exp(p):
-    '''print_exp : COMMA print_val
-                 | empty '''
+    '''print_exp : COMMA  print_val
+                 | empty'''
 
 
 # Error rule for syntax errors
 def p_error(p):
+    # raise Exception("Syntax error in input! - {} ".format(p))
     print("Syntax error in input! - {} ".format(p))
 
 
 def p_empty(p):
     '''empty :'''
+    pass
 
+
+import sys
+import ply.yacc as yacc
+
+from lexer import tokens
 
 yacc.yacc()
 
@@ -151,7 +152,7 @@ if __name__ == '__main__':
         f = open(file, 'r')
         data = f.read()
         f.close()
-        if yacc.parse(data, tracking=True) == "COMPILED":
+        if yacc.parse(data) == "COMPILED":
             print("Valid input")
     except EOFError:
         print(EOFError)
