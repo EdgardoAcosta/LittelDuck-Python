@@ -1,1 +1,13 @@
 
+# IDE files
+.idea/
+
+# Virtual env files
+venv/
+
+# Lex and Yacc compile files
+parser.out
+parsetab.py
+
+# Test files
+*.txt
