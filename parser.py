@@ -147,12 +147,15 @@ yacc.yacc()
 
 if __name__ == '__main__':
 
-    file = sys.argv[1]
-    try:
-        f = open(file, 'r')
-        data = f.read()
-        f.close()
-        if yacc.parse(data) == "COMPILED":
-            print("Valid input")
-    except EOFError:
-        print(EOFError)
+    if len(sys.argv) > 1:
+        file = sys.argv[1]
+        try:
+            f = open(file, 'r')
+            data = f.read()
+            f.close()
+            if yacc.parse(data) == "COMPILED":
+                print("Valid input")
+        except EOFError:
+            print(EOFError)
+    else:
+        print("No file to test found")

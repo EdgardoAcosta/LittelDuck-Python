@@ -1,6 +1,7 @@
 
 # IDE files
 .idea/
+.vscode/
 
 # Virtual env files
 venv/
@@ -11,3 +12,6 @@ parsetab.py
 
 # Test files
 *.txt
+
+# Gerereted files
+*.pyc
